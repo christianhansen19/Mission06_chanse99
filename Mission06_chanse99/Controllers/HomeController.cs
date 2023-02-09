@@ -32,7 +32,7 @@ namespace Mission06_chanse99.Controllers
         [HttpPost]
         public IActionResult AddNewMovie(MovieResponse mr)
         {
-            return View("Confirmation");
+            return View("Confirmation", mr);
         }
 
         public IActionResult MyPodcasts()

@@ -2,7 +2,9 @@
     ViewData["Title"] = "Movie Added";
 }
 
-<h2>Movie Added</h2>
+@model Mission06_chanse99.Models.MovieResponse
+
+<h2>@Model.MovieTitle has been added</h2>
 
 <div>
     <a asp-controller="Home" asp-action="AddNewMovie">Add Another Movie</a>
