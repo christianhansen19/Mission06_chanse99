@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Add Movie";
+}
+
+@model  Mission06_chanse99.Models.MovieResponse
+
+<div>
+    <form method="post">
+        <label asp-for="MovieTitle" >Title</label>
+        <input asp-for="MovieTitle" /><br />
+        <label asp-for="Year" >Year</label>
+        <input asp-for="Year" /><br />
+        <label asp-for="Category" >Category</label>
+        <input asp-for="Category" /><br />
+        <label asp-for="Director" >Director</label>
+        <input asp-for="Director" /><br />
+        <label asp-for="Rating" >Rating</label>
+        <select asp-for="Rating">
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+        </select><br />
+        <label asp-for="Edited" >Edited</label>
+        <select>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select><br />
+        <label asp-for="LentTo" >Lent to</label>
+        <input asp-for="LentTo" /><br />
+        <label asp-for="Notes" >Notes</label>
+        <input asp-for="Notes" /><br />
+
+        <button type="submit">Add</button>
+    </form>
+</div>
