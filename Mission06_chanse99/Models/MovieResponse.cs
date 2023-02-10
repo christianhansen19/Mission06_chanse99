@@ -8,6 +8,9 @@ namespace Mission06_chanse99.Models
 {
     public class MovieResponse
     {
+        [Key]
+        [Required]
+        public int MovieId { get; set; }
         [Required]
         public string MovieTitle { get; set; }
         [Required]
