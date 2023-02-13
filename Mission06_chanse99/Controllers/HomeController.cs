@@ -35,9 +35,16 @@ namespace Mission06_chanse99.Controllers
         [HttpPost]
         public IActionResult AddNewMovie(MovieResponse mr)
         {
-            blahContext.Add(mr);
-            blahContext.SaveChanges();
-            return View("Confirmation", mr);
+            if (ModelState.IsValid) // if the model is valid, display the confirmation page
+            {
+                blahContext.Add(mr);
+                blahContext.SaveChanges();
+                return View("Confirmation", mr);
+            }
+            else // if the model is invalid, display form page still
+            {
+                return View("MovieForm");
+            }
         }
 
         public IActionResult MyPodcasts()
