@@ -53,6 +53,44 @@ namespace Mission06_chanse99.Migrations
                     b.HasKey("MovieId");
 
                     b.ToTable("responses");
+
+                    b.HasData(
+                        new
+                        {
+                            MovieId = 1,
+                            Category = "Action/Adventure",
+                            Director = "Ryan Coogler",
+                            Edited = false,
+                            LentTo = "",
+                            MovieTitle = "Black Panther: Wakanda Forever",
+                            Notes = "",
+                            Rating = "PG-13",
+                            Year = (ushort)2022
+                        },
+                        new
+                        {
+                            MovieId = 2,
+                            Category = "Adventure/Comedy",
+                            Director = "Joel Crawford",
+                            Edited = false,
+                            LentTo = "",
+                            MovieTitle = "Puss in Boots: The Last Wish",
+                            Notes = "",
+                            Rating = "PG",
+                            Year = (ushort)2022
+                        },
+                        new
+                        {
+                            MovieId = 3,
+                            Category = "Drama/Comedy",
+                            Director = "Marc Forster",
+                            Edited = false,
+                            LentTo = "",
+                            MovieTitle = "A Man Called Otto",
+                            Notes = "",
+                            Rating = "PG-13",
+                            Year = (ushort)2022
+                        });
                 });
 #pragma warning restore 612, 618
         }

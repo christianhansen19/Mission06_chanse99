@@ -25,6 +25,21 @@ namespace Mission06_chanse99.Migrations
                 {
                     table.PrimaryKey("PK_responses", x => x.MovieId);
                 });
+
+            migrationBuilder.InsertData(
+                table: "responses",
+                columns: new[] { "MovieId", "Category", "Director", "Edited", "LentTo", "MovieTitle", "Notes", "Rating", "Year" },
+                values: new object[] { 1, "Action/Adventure", "Ryan Coogler", false, "", "Black Panther: Wakanda Forever", "", "PG-13", (ushort)2022 });
+
+            migrationBuilder.InsertData(
+                table: "responses",
+                columns: new[] { "MovieId", "Category", "Director", "Edited", "LentTo", "MovieTitle", "Notes", "Rating", "Year" },
+                values: new object[] { 2, "Adventure/Comedy", "Joel Crawford", false, "", "Puss in Boots: The Last Wish", "", "PG", (ushort)2022 });
+
+            migrationBuilder.InsertData(
+                table: "responses",
+                columns: new[] { "MovieId", "Category", "Director", "Edited", "LentTo", "MovieTitle", "Notes", "Rating", "Year" },
+                values: new object[] { 3, "Drama/Comedy", "Marc Forster", false, "", "A Man Called Otto", "", "PG-13", (ushort)2022 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

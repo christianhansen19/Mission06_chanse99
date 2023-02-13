@@ -12,10 +12,13 @@ namespace Mission06_chanse99.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private MovieCollectionContext blahContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        //Constructor
+        public HomeController(ILogger<HomeController> logger, MovieCollectionContext someName)
         {
             _logger = logger;
+            blahContext = someName;
         }
 
         public IActionResult Index()
@@ -32,6 +35,8 @@ namespace Mission06_chanse99.Controllers
         [HttpPost]
         public IActionResult AddNewMovie(MovieResponse mr)
         {
+            blahContext.Add(mr);
+            blahContext.SaveChanges();
             return View("Confirmation", mr);
         }
 
