@@ -11,13 +11,13 @@ namespace Mission06_chanse99.Models
         [Key]
         [Required]
         public int MovieId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Please enter a movie title.")]
         public string MovieTitle { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter the year the movie was released.")]
         public ushort Year { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter the name of the Director of the movie.")]
         public string Director { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please select the accurate rating for the movie.")]
         public string Rating { get; set; }
         public bool Edited { get; set; }
         public string LentTo { get; set; }

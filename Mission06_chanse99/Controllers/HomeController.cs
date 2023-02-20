@@ -43,7 +43,8 @@ namespace Mission06_chanse99.Controllers
             }
             else // if the model is invalid, display form page still
             {
-                return View("MovieForm");
+                ViewBag.Categories = mcContext.Categories.ToList();
+                return View("MovieForm", mr);
             }
         }
 
@@ -59,6 +60,41 @@ namespace Mission06_chanse99.Controllers
                 .OrderBy(x => x.MovieTitle)
                 .ToList();
             return View(applications);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int movieid)
+        {
+            ViewBag.Categories = mcContext.Categories.ToList();
+
+            var movie = mcContext.responses.Single(x => x.MovieId == movieid);
+
+            return View("MovieForm", movie);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(MovieResponse blah)
+        {
+            mcContext.Update(blah);
+            mcContext.SaveChanges();
+            return RedirectToAction("MovieCollectionList");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int movieid)
+        {
+            var movie = mcContext.responses.Single(x => x.MovieId == movieid);
+
+            return View(movie);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(MovieResponse mr)
+        {
+            mcContext.responses.Remove(mr);
+            mcContext.SaveChanges();
+
+            return RedirectToAction("MovieCollectionList");
         }
     }
 }
