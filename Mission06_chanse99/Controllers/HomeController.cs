@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission06_chanse99.Models;
 using System;
@@ -11,14 +12,12 @@ namespace Mission06_chanse99.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private MovieCollectionContext blahContext { get; set; }
+        private MovieCollectionContext mcContext { get; set; }
 
         //Constructor
-        public HomeController(ILogger<HomeController> logger, MovieCollectionContext someName)
+        public HomeController(MovieCollectionContext someName)
         {
-            _logger = logger;
-            blahContext = someName;
+            mcContext = someName;
         }
 
         public IActionResult Index()
@@ -29,6 +28,7 @@ namespace Mission06_chanse99.Controllers
         [HttpGet]
         public IActionResult AddNewMovie()
         {
+            ViewBag.Categories = mcContext.Categories.ToList();
             return View("MovieForm");
         }
 
@@ -37,8 +37,8 @@ namespace Mission06_chanse99.Controllers
         {
             if (ModelState.IsValid) // if the model is valid, display the confirmation page
             {
-                blahContext.Add(mr);
-                blahContext.SaveChanges();
+                mcContext.Add(mr);
+                mcContext.SaveChanges();
                 return View("Confirmation", mr);
             }
             else // if the model is invalid, display form page still
@@ -52,15 +52,13 @@ namespace Mission06_chanse99.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult MovieCollectionList()
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var applications = mcContext.responses
+                .Include(x => x.Category)
+                .OrderBy(x => x.MovieTitle)
+                .ToList();
+            return View(applications);
         }
     }
 }

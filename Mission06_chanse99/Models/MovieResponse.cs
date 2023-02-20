@@ -14,8 +14,6 @@ namespace Mission06_chanse99.Models
         [Required]
         public string MovieTitle { get; set; }
         [Required]
-        public string Category { get; set; }
-        [Required]
         public ushort Year { get; set; }
         [Required]
         public string Director { get; set; }
@@ -25,5 +23,10 @@ namespace Mission06_chanse99.Models
         public string LentTo { get; set; }
         [MaxLength(25)]
         public string Notes { get; set; }
+
+        // Build Foreign Key Relationship
+        [Required]
+        public int CategoryID { get; set; }
+        public Category Category { get; set; }
     }
 }

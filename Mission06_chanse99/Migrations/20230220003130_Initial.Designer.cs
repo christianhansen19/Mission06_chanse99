@@ -8,7 +8,7 @@ using Mission06_chanse99.Models;
 namespace Mission06_chanse99.Migrations
 {
     [DbContext(typeof(MovieCollectionContext))]
-    [Migration("20230213205023_Initial")]
+    [Migration("20230220003130_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,15 +17,70 @@ namespace Mission06_chanse99.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("Mission06_chanse99.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryID = 5,
+                            CategoryName = "Horror/Suspense"
+                        },
+                        new
+                        {
+                            CategoryID = 6,
+                            CategoryName = "Miscellaneous"
+                        },
+                        new
+                        {
+                            CategoryID = 7,
+                            CategoryName = "Television"
+                        },
+                        new
+                        {
+                            CategoryID = 8,
+                            CategoryName = "VHS"
+                        });
+                });
+
             modelBuilder.Entity("Mission06_chanse99.Models.MovieResponse", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -54,13 +109,15 @@ namespace Mission06_chanse99.Migrations
 
                     b.HasKey("MovieId");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("responses");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            Category = "Action/Adventure",
+                            CategoryID = 1,
                             Director = "Ryan Coogler",
                             Edited = false,
                             LentTo = "",
@@ -72,7 +129,7 @@ namespace Mission06_chanse99.Migrations
                         new
                         {
                             MovieId = 2,
-                            Category = "Adventure/Comedy",
+                            CategoryID = 2,
                             Director = "Joel Crawford",
                             Edited = false,
                             LentTo = "",
@@ -84,7 +141,7 @@ namespace Mission06_chanse99.Migrations
                         new
                         {
                             MovieId = 3,
-                            Category = "Drama/Comedy",
+                            CategoryID = 3,
                             Director = "Marc Forster",
                             Edited = false,
                             LentTo = "",
@@ -93,6 +150,15 @@ namespace Mission06_chanse99.Migrations
                             Rating = "PG-13",
                             Year = (ushort)2022
                         });
+                });
+
+            modelBuilder.Entity("Mission06_chanse99.Models.MovieResponse", b =>
+                {
+                    b.HasOne("Mission06_chanse99.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
